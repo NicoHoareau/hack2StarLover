@@ -35,7 +35,6 @@ public class TchatActivity extends AppCompatActivity {
     private DatabaseReference root = FirebaseDatabase.getInstance().getReference();
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
