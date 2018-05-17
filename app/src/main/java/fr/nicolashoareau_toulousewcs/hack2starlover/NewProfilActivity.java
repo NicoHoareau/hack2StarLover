@@ -8,6 +8,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -62,6 +64,24 @@ public class NewProfilActivity extends AppCompatActivity {
         mStorageReference = FirebaseStorage.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
 
+        final Spinner spinner = findViewById(R.id.spinner_planete);
+        List<String> planete = new ArrayList<String>();
+        planete.add("Tatooine");
+        planete.add("Naboo");
+        planete.add("Kashyyk");
+        planete.add("Dogobah");
+        planete.add("Kamino");
+        planete.add("Coruscont");
+        planete.add("Alderaan");
+        planete.add("Jakku");
+
+        //auto.setOnItemSelectedListener
+
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout
+                .simple_spinner_dropdown_item, planete);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
 
 
 
@@ -91,6 +111,11 @@ public class NewProfilActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+
+
+
 
 
     }
@@ -154,9 +179,10 @@ public class NewProfilActivity extends AppCompatActivity {
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
                 String profilPic = downloadUrl.toString();
                 UserModel userModel = new UserModel(pseudo, profilPic);
-                FirebaseUser user = mAuth.getCurrentUser();
+                final FirebaseUser user = mAuth.getCurrentUser();
                 mDatabaseReference = mDatabase.getReference("User");
                 mDatabaseReference.child(mSide).child(user.getUid()).child("Profil").setValue(userModel);
+
 
                 checkBoxmasculin = findViewById(R.id.checkBox_m);
 
@@ -192,15 +218,13 @@ public class NewProfilActivity extends AppCompatActivity {
                         }
                     });
 
-
-
                 }
-
-
 
 
             }
         });
+
+
 
 
 
