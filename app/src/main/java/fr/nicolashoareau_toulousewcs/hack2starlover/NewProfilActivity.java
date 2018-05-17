@@ -64,9 +64,7 @@ public class NewProfilActivity extends AppCompatActivity {
         mStorageReference = FirebaseStorage.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
 
-
-        /*final Spinner spinner = findViewById(R.id.spinner_planete);
-        final FirebaseUser user = mAuth.getCurrentUser();
+        final Spinner spinner = findViewById(R.id.spinner_planete);
         List<String> planete = new ArrayList<String>();
         planete.add("Tatooine");
         planete.add("Naboo");
@@ -76,7 +74,13 @@ public class NewProfilActivity extends AppCompatActivity {
         planete.add("Coruscont");
         planete.add("Alderaan");
         planete.add("Jakku");
-        */
+
+        //auto.setOnItemSelectedListener
+
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout
+                .simple_spinner_dropdown_item, planete);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
 
 
