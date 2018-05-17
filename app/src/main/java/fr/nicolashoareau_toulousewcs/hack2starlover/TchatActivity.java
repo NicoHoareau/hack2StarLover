@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,6 +26,8 @@ import java.util.Map;
 public class TchatActivity extends AppCompatActivity {
 
     private String name;
+    FirebaseDatabase mDatabase;
+    private String mUid;
 
     private DatabaseReference root = FirebaseDatabase.getInstance().getReference().child("Planet");
 
@@ -34,8 +38,8 @@ public class TchatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tchat);
 
         final ListView listMessage = findViewById(R.id.list_message);
-        final EditText etMessage = findViewById(R.id.et_message);
-        Button btnSend = findViewById(R.id.btn_send);
+        //final EditText etMessage = findViewById(R.id.et_message);
+        //Button btnSend = findViewById(R.id.btn_send);
 
         final ArrayList<PlanetModel> planetModelArrayList = new ArrayList<>();
         final PlanetAdapter planetAdapter = new PlanetAdapter(this, planetModelArrayList);
@@ -51,20 +55,9 @@ public class TchatActivity extends AppCompatActivity {
         } catch (Exception e) {
         }
 
-
-        /*arrayAdapter = new ArrayAdapter<String>(this, R.layout.item_grid_planet, arrayList);
-        listMessage.setAdapter(arrayAdapter);*/
-
         request_user_name();
 
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Map<String, Object> map = new HashMap<String, Object>();
-                map.put(etMessage.getText().toString(),"");
-                root.updateChildren(map);
-            }
-        });
+
         root.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -76,6 +69,34 @@ public class TchatActivity extends AppCompatActivity {
 
             }
         });
+
+        //TODO : à mettre une fois un profil créé
+        /*mDatabase = FirebaseDatabase.getInstance();
+        mUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference planetRef = mDatabase.getReference().child(mUid);
+        planetRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                final String username = dataSnapshot.child("pseudo").getValue(String.class);
+                listMessage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        PlanetModel item = (PlanetModel) listPlanet.getItemAtPosition(position);
+                        Intent intent = new Intent(TchatActivity.this, TchatRoomActivity.class);
+                        String namePlanete = item.getNamePlanete();
+                        intent.putExtra("room_name", namePlanete);
+                        intent.putExtra("username", username);
+
+                        startActivity(intent);
+                    }
+                });
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+        */
+
         listMessage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -110,9 +131,6 @@ public class TchatActivity extends AppCompatActivity {
             }
         });
         builder.show();
-
-
-
 
     }
 }
