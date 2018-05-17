@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "100303391933",
+    "firebase_url": "https://hack2starlover-9dfca.firebaseio.com",
+    "project_id": "hack2starlover-9dfca",
+    "storage_bucket": "hack2starlover-9dfca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100303391933:android:3f84ca813ee067d2",
+        "android_client_info": {
+          "package_name": "fr.nicolashoareau_toulousewcs.hack2starlover"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "100303391933-fim2sevun3p3k25dlc609m1to49ahg2i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.nicolashoareau_toulousewcs.hack2starlover",
+            "certificate_hash": "0395cfb73fe9f876598aa53c4eb3ef620f4048bd"
+          }
+        },
+        {
+          "client_id": "100303391933-8surc5ninvq5qn3jslirnf7qje02mlfu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDsseo7dvH3SZpEbmQ5APoI3agU3tsyE8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "100303391933-8surc5ninvq5qn3jslirnf7qje02mlfu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
