@@ -40,12 +40,10 @@ public class TchatRoomActivity extends AppCompatActivity {
         message = findViewById(R.id.et_msg_person);
         chat_conversation = findViewById(R.id.tv_conversation);
 
-        user_name = getIntent().getExtras().get("user_name").toString();
+        user_name = getIntent().getExtras().get("username").toString();
         room_name = getIntent().getExtras().get("room_name").toString();
 
-        setTitle("Room  - " + room_name);
-
-        root = FirebaseDatabase.getInstance().getReference().child(room_name);
+        root = FirebaseDatabase.getInstance().getReference("Match").child(room_name);
 
         btn_send_message.setOnClickListener(new View.OnClickListener() {
             @Override

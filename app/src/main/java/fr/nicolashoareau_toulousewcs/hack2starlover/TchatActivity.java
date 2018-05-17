@@ -19,10 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 public class TchatActivity extends AppCompatActivity {
 
@@ -40,19 +37,20 @@ public class TchatActivity extends AppCompatActivity {
         final EditText etMessage = findViewById(R.id.et_message);
         Button btnSend = findViewById(R.id.btn_send);
 
-        ArrayList<PlanetModel> planetModelArrayList = new ArrayList<>();
-        PlanetAdapter planetAdapter = new PlanetAdapter(this, planetModelArrayList);
-        final ListView listMonster = findViewById(R.id.list_message);
-        listMonster.setAdapter(planetAdapter);
+        final ArrayList<PlanetModel> planetModelArrayList = new ArrayList<>();
+        final PlanetAdapter planetAdapter = new PlanetAdapter(this, planetModelArrayList);
+        final ListView listPlanet = findViewById(R.id.list_message);
+        listPlanet.setAdapter(planetAdapter);
         try {
-            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "tatooine"));
-            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "naboo"));
-            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "alderaan"));
-            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "kashyyyk"));
-            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "kashyyyk"));
-            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "kashyyyk"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "Tatooine"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "Naboo"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "Alderaan"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "Kashyyyk"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "Kashyyyk"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "Kashyyyk"));
         } catch (Exception e) {
         }
+
 
         /*arrayAdapter = new ArrayAdapter<String>(this, R.layout.item_grid_planet, arrayList);
         listMessage.setAdapter(arrayAdapter);*/
@@ -70,14 +68,7 @@ public class TchatActivity extends AppCompatActivity {
         root.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Set<String> set = new HashSet<String>();
-                Iterator i = dataSnapshot.getChildren().iterator();
-                while (i.hasNext()){
-                    set.add(((DataSnapshot)i.next()).getKey());
-                }
-                arrayList.clear();
-                arrayList.addAll(set);
-                arrayAdapter.notifyDataSetChanged();
+                planetAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -88,9 +79,11 @@ public class TchatActivity extends AppCompatActivity {
         listMessage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), TchatRoomActivity.class);
-                intent.putExtra("room_name", ((TextView)view).getText().toString());
-                intent.putExtra("user_name",name);
+                PlanetModel item = (PlanetModel) listPlanet.getItemAtPosition(position);
+                Intent intent = new Intent(TchatActivity.this, TchatRoomActivity.class);
+                String namePlanete = item.getNamePlanete();
+                intent.putExtra("room_name",namePlanete);
+                intent.putExtra("username",name);
                 startActivity(intent);
             }
         });
