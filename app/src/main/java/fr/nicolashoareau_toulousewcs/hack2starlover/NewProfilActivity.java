@@ -174,9 +174,6 @@ public class NewProfilActivity extends AppCompatActivity {
                         }
                     });
 
-
-
-
                 }
 
                 checkBoxfeminin = findViewById(R.id.checkBox_f);
