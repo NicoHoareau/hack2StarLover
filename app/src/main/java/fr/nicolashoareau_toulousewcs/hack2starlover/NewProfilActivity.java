@@ -4,17 +4,21 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,12 +28,17 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class NewProfilActivity extends AppCompatActivity {
 
     String mSide;
     ImageView mProfilPic;
     EditText mPseudo;
     private Uri mUri = null;
+    CheckBox checkBoxfeminin, checkBoxmasculin;
+
 
     private DatabaseReference mDatabaseReference;
     private FirebaseDatabase mDatabase;
@@ -52,6 +61,9 @@ public class NewProfilActivity extends AppCompatActivity {
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mStorageReference = FirebaseStorage.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
+
+
+
 
         mProfilPic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,10 +157,56 @@ public class NewProfilActivity extends AppCompatActivity {
                 FirebaseUser user = mAuth.getCurrentUser();
                 mDatabaseReference = mDatabase.getReference("User");
                 mDatabaseReference.child(mSide).child(user.getUid()).child("Profil").setValue(userModel);
+
+                checkBoxmasculin = findViewById(R.id.checkBox_m);
+
+                if (checkBoxmasculin.isChecked()){
+                    mDatabaseReference.child(mSide).child(user.getUid()).child("Profil").child("genre").
+                            setValue("masculin").addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(NewProfilActivity.this, "OK", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+
+
+
+
+                }
+
+                checkBoxfeminin = findViewById(R.id.checkBox_f);
+                if(checkBoxfeminin.isChecked()){
+
+                    mDatabaseReference.child(mSide).child(user.getUid()).child("Profil").child("genre").
+                            setValue("feminin").addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(NewProfilActivity.this, "OK", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+
+
+
+                }
+
+
+
+
             }
         });
 
 
 
     }
+
 }
