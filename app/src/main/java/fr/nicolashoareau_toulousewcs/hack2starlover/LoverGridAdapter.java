@@ -1,11 +1,13 @@
 package fr.nicolashoareau_toulousewcs.hack2starlover;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -15,15 +17,18 @@ public class LoverGridAdapter extends ArrayAdapter<LoverModel>{
     }
 
         @Override
-        public View getView (int position, View convertView, ViewGroup parent) {
+        public View getView (int position, View convertView, final ViewGroup parent) {
             LoverModel userGrid = getItem(position);
 
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_grid_lover, parent, false);
 
-                ImageView img = (ImageView) convertView.findViewById(R.id.img_lover_grid);
-
             }
+
+            TextView nameLover = (TextView) convertView.findViewById(R.id.tv_name_lover);
+            nameLover.setText(userGrid.getNameLover());
+
+            final ImageView imgLover = (ImageView) convertView.findViewById(R.id.img_lover_grid);
 
             return convertView;
 
