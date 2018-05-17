@@ -16,10 +16,9 @@ import java.util.ArrayList;
 
 public class ChooseLoverActivity extends AppCompatActivity {
     private GridView mLoverGrid;
-    private DatabaseReference mDatabaseReference;
 
-    private FirebaseUser mUser;
-    private UserModel mModelUser;
+
+
 
 
 
@@ -27,42 +26,6 @@ public class ChooseLoverActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_lover);
-
-
-
-
-
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("User" +mUser+ "/profilPic");
-
-        mUser = FirebaseAuth.getInstance().getCurrentUser();
-        final ArrayList arrayList = new ArrayList<>();
-        mLoverGrid = findViewById(R.id.grid_lovers);
-
-        final LoverGridAdapter lover = new LoverGridAdapter(this, arrayList);
-
-
-        mDatabaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot userPic : dataSnapshot.getChildren()){
-                    mModelUser = userPic.getValue(UserModel.class);
-                    arrayList.add(mModelUser);
-                    mLoverGrid.setAdapter(lover);
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-
-
-
 
         mLoverGrid = findViewById(R.id.grid_lovers);
 
