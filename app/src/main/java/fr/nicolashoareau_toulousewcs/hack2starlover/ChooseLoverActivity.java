@@ -11,5 +11,6 @@ public class ChooseLoverActivity extends AppCompatActivity {
         setContentView(R.layout.activity_choose_lover);
 
 
+
     }
 }
