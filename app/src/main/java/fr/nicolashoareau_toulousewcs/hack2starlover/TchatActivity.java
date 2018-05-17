@@ -46,7 +46,7 @@ public class TchatActivity extends AppCompatActivity {
         final ListView listPlanet = findViewById(R.id.list_message);
         listPlanet.setAdapter(planetAdapter);
         try {
-            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "Tatooine"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.tatooine_back, "Tatooine"));
             planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "Naboo"));
             planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "Alderaan"));
             planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "Kashyyyk"));

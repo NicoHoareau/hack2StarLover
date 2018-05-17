@@ -33,6 +33,7 @@ public class PlanetAdapter extends ArrayAdapter<PlanetModel>{
         namePlanet.setText(planetModel.getNamePlanete());
 
         ImageView imgPlanet = (ImageView) convertView.findViewById(R.id.iv_picture_planet);
+        imgPlanet.setImageResource(planetModel.getPlanetPicture());
         /*imgPlanet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
