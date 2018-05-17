@@ -12,17 +12,21 @@
         <activity android:name=".MainActivity">
         </activity>
         <activity android:name=".LoginActivity">
+
+        </activity>
+        <activity android:name=".ChooseSideActivity" />
+        <activity android:name=".MatchActivity" />
+        <activity android:name=".ChoosePlanetActivity">
+        </activity>
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".SeeLoversActivity"></activity>
+        <activity android:name=".ChooseLoverActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChooseSideActivity" />
-        <activity android:name=".MatchActivity" />
-        <activity android:name=".ChoosePlanetActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".SeeLoversActivity"></activity>
     </application>
 
 </manifest>

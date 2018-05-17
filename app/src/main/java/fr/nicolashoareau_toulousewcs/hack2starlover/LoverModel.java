@@ -4,22 +4,32 @@ import android.widget.ImageView;
 
 public class LoverModel {
 
-    public LoverModel(ImageView image) {
-        this.image = image;
-    }
+    private int imageLover;
+    private String nameLover;
 
     public LoverModel() {
     }
 
-    public ImageView getImage() {
-        return image;
-
+    public LoverModel(int imageLover, String nameLover) {
+        this.imageLover = imageLover;
+        this.nameLover = nameLover;
     }
 
-    public void setImage(ImageView image) {
-        this.image = image;
+
+    public int getImageLover() {
+        return imageLover;
     }
 
-    ImageView image;
+    public void setImageLover(int imageLover) {
+        this.imageLover = imageLover;
+    }
+
+    public String getNameLover() {
+        return nameLover;
+    }
+
+    public void setNameLover(String nameLover) {
+        this.nameLover = nameLover;
+    }
 }
 
