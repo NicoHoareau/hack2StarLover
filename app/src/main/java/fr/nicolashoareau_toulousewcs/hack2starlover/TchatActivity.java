@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,18 +21,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 public class TchatActivity extends AppCompatActivity {
 
-    private ArrayAdapter<String> arrayAdapter;
-    private ArrayList<String> arrayList = new ArrayList();
     private String name;
+    FirebaseDatabase mDatabase;
+    private String mUid;
 
-    private DatabaseReference root = FirebaseDatabase.getInstance().getReference();
+    private DatabaseReference root = FirebaseDatabase.getInstance().getReference().child("Planet");
 
 
     @Override
@@ -39,33 +38,30 @@ public class TchatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tchat);
 
         final ListView listMessage = findViewById(R.id.list_message);
-        final EditText etMessage = findViewById(R.id.et_message);
-        Button btnSend = findViewById(R.id.btn_send);
+        //final EditText etMessage = findViewById(R.id.et_message);
+        //Button btnSend = findViewById(R.id.btn_send);
 
-        arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, arrayList);
-        listMessage.setAdapter(arrayAdapter);
+        final ArrayList<PlanetModel> planetModelArrayList = new ArrayList<>();
+        final PlanetAdapter planetAdapter = new PlanetAdapter(this, planetModelArrayList);
+        final ListView listPlanet = findViewById(R.id.list_message);
+        listPlanet.setAdapter(planetAdapter);
+        try {
+            planetModelArrayList.add(new PlanetModel(R.drawable.tatooine_back, "Tatooine"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "Naboo"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "Alderaan"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "Kashyyyk"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "Kashyyyk"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "Kashyyyk"));
+        } catch (Exception e) {
+        }
 
         request_user_name();
 
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Map<String, Object> map = new HashMap<String, Object>();
-                map.put(etMessage.getText().toString(),"");
-                root.updateChildren(map);
-            }
-        });
+
         root.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Set<String> set = new HashSet<String>();
-                Iterator i = dataSnapshot.getChildren().iterator();
-                while (i.hasNext()){
-                    set.add(((DataSnapshot)i.next()).getKey());
-                }
-                arrayList.clear();
-                arrayList.addAll(set);
-                arrayAdapter.notifyDataSetChanged();
+                planetAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -73,12 +69,42 @@ public class TchatActivity extends AppCompatActivity {
 
             }
         });
+
+        //TODO : à mettre une fois un profil créé
+        /*mDatabase = FirebaseDatabase.getInstance();
+        mUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference planetRef = mDatabase.getReference().child(mUid);
+        planetRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                final String username = dataSnapshot.child("pseudo").getValue(String.class);
+                listMessage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        PlanetModel item = (PlanetModel) listPlanet.getItemAtPosition(position);
+                        Intent intent = new Intent(TchatActivity.this, TchatRoomActivity.class);
+                        String namePlanete = item.getNamePlanete();
+                        intent.putExtra("room_name", namePlanete);
+                        intent.putExtra("username", username);
+
+                        startActivity(intent);
+                    }
+                });
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+        */
+
         listMessage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), TchatRoomActivity.class);
-                intent.putExtra("room_name", ((TextView)view).getText().toString());
-                intent.putExtra("user_name",name);
+                PlanetModel item = (PlanetModel) listPlanet.getItemAtPosition(position);
+                Intent intent = new Intent(TchatActivity.this, TchatRoomActivity.class);
+                String namePlanete = item.getNamePlanete();
+                intent.putExtra("room_name",namePlanete);
+                intent.putExtra("username",name);
                 startActivity(intent);
             }
         });
@@ -105,9 +131,6 @@ public class TchatActivity extends AppCompatActivity {
             }
         });
         builder.show();
-
-
-
 
     }
 }

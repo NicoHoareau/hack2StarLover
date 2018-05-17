@@ -1,6 +1,7 @@
 package fr.nicolashoareau_toulousewcs.hack2starlover;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -15,8 +16,8 @@ import java.util.ArrayList;
 
 public class PlanetAdapter extends ArrayAdapter<PlanetModel>{
 
-    public PlanetAdapter(Context context, ArrayList<PlanetModel> planetGrid) {
-        super(context, 0, planetGrid);
+    public PlanetAdapter(Context context, ArrayList<PlanetModel> planetList) {
+        super(context, 0, planetList);
     }
 
     @Override
@@ -32,7 +33,8 @@ public class PlanetAdapter extends ArrayAdapter<PlanetModel>{
         namePlanet.setText(planetModel.getNamePlanete());
 
         ImageView imgPlanet = (ImageView) convertView.findViewById(R.id.iv_picture_planet);
-        imgPlanet.setOnClickListener(new View.OnClickListener() {
+        imgPlanet.setImageResource(planetModel.getPlanetPicture());
+        /*imgPlanet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext());
@@ -42,14 +44,17 @@ public class PlanetAdapter extends ArrayAdapter<PlanetModel>{
                 final AlertDialog dialog = mBuilder.create();
                 //contain :
                 TextView tvNamePlanet = mView.findViewById(R.id.tv_name_planet_dialog);
-                Button btnValidateChoice = mView.findViewById(R.id.btn_validate_planet);
                 ImageView imgPlanetSelected = mView.findViewById(R.id.iv_planet_select);
+                Button btnValidatePlanet = mView.findViewById(R.id.btn_validate_planet);
+                btnValidatePlanet.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                });
                 dialog.show();
 
-
-
             }
-        });
+        });*/
 
 
         return convertView;

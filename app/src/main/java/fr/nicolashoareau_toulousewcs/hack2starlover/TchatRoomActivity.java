@@ -3,19 +3,19 @@ package fr.nicolashoareau_toulousewcs.hack2starlover;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.firebase.ui.database.FirebaseListAdapter;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -40,11 +40,10 @@ public class TchatRoomActivity extends AppCompatActivity {
         message = findViewById(R.id.et_msg_person);
         chat_conversation = findViewById(R.id.tv_conversation);
 
-        user_name = getIntent().getExtras().get("user_name").toString();
+        user_name = getIntent().getExtras().get("username").toString();
         room_name = getIntent().getExtras().get("room_name").toString();
-        setTitle("Room  - " + room_name);
 
-        root = FirebaseDatabase.getInstance().getReference().child(room_name);
+        root = FirebaseDatabase.getInstance().getReference("Match").child(room_name);
 
         btn_send_message.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +52,6 @@ public class TchatRoomActivity extends AppCompatActivity {
                 temp_key = root.push().getKey();
                 root.updateChildren(map);
                 DatabaseReference message_root = root.child(temp_key);
-
 
                 Map<String, Object> map2 = new HashMap<String, Object>();
                 map2.put("name", user_name);
@@ -99,7 +97,7 @@ public class TchatRoomActivity extends AppCompatActivity {
         while (i.hasNext()){
             chat_msg = (String) ((DataSnapshot)i.next()).getValue();
             chat_user_name = (String) ((DataSnapshot)i.next()).getValue();
-            chat_conversation.append(chat_user_name + " : " + chat_msg + "\n");
+            chat_conversation.append("\n" + chat_user_name + " : " + "\n" + chat_msg + "\n");
         }
     }
 
