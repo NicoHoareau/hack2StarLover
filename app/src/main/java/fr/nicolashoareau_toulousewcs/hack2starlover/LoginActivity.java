@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
+
     public static String CACHE_USERNAME = "username";
     public static String EXTRA_LOGIN = "EXTRA_LOGIN";
 
@@ -26,11 +27,11 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mEditPassword;
     private EditText mNewEmail;
     private EditText mNewPassword;
-    private ImageView mImageLogin;
-    ImageView mImageSignUp;
+    private Button mImageLogin;
+    Button mImageSignUp;
     Button mBtnNewAccount;
     ProgressBar mProgressBar;
-    ImageView mReturn;
+    Button mReturn;
 
 
     private FirebaseAuth mAuth;
@@ -39,13 +40,17 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
         mProgressBar = findViewById(R.id.progressbar);
         mEditEmail = findViewById(R.id.edit_email);
         mEditPassword = findViewById(R.id.edit_password);
         mImageLogin = findViewById(R.id.image_log);
+        Button imageLog = (Button) findViewById(R.id.image_log);
+
+
+
         mImageSignUp = findViewById(R.id.image_signup);
         mReturn = findViewById(R.id.iv_close_friend);
 
@@ -57,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                 mProgressBar.setVisibility(view.VISIBLE);
                 if (loginValue.isEmpty() || passwordValue.isEmpty()) {
                     mProgressBar.setVisibility(View.GONE);
-                    Toast.makeText(LoginActivity.this, R.string.enter_pseudo_password, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "entrez un pseudo et un mot de passe", Toast.LENGTH_SHORT).show();
                 } else {
                     mAuth.signInWithEmailAndPassword(loginValue, passwordValue).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -83,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                 mNewEmail = findViewById(R.id.new_mail);
                 mNewPassword = findViewById(R.id.new_password);
                 mBtnNewAccount = findViewById(R.id.btn_new_account);
-                final ImageView buttonSignIn = findViewById(R.id.image_log);
+                final Button buttonSignIn = findViewById(R.id.image_log);
 
                 mReturn.setVisibility(View.VISIBLE);
                 mNewPassword.setVisibility(View.VISIBLE);
@@ -100,14 +105,14 @@ public class LoginActivity extends AppCompatActivity {
                         String emailN = mNewEmail.getText().toString();
                         String passwordN = mNewPassword.getText().toString();
                         if (TextUtils.isEmpty(emailN) || (TextUtils.isEmpty(passwordN))){
-                            Toast.makeText(LoginActivity.this, R.string.enter_both_values, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Entrez tous les champs demandés", Toast.LENGTH_SHORT).show();
                         }
                         else {
                             mAuth.createUserWithEmailAndPassword(emailN, passwordN).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(LoginActivity.this, R.string.account_create, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginActivity.this, "Compte créé", Toast.LENGTH_SHORT).show();
                                         Intent intentProfil = new Intent(LoginActivity.this, MainActivity.class);
                                         startActivity(intentProfil);
                                     }
