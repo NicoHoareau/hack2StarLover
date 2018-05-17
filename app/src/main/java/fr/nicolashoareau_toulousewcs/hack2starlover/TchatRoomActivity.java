@@ -3,12 +3,14 @@ package fr.nicolashoareau_toulousewcs.hack2starlover;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.google.android.gms.common.SignInButton;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +30,7 @@ public class TchatRoomActivity extends AppCompatActivity {
     private DatabaseReference root;
     private String temp_key;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +39,6 @@ public class TchatRoomActivity extends AppCompatActivity {
         btn_send_message = findViewById(R.id.btn_send_message);
         message = findViewById(R.id.et_msg_person);
         chat_conversation = findViewById(R.id.tv_conversation);
-
 
         user_name = getIntent().getExtras().get("user_name").toString();
         room_name = getIntent().getExtras().get("room_name").toString();
@@ -51,6 +53,8 @@ public class TchatRoomActivity extends AppCompatActivity {
                 temp_key = root.push().getKey();
                 root.updateChildren(map);
                 DatabaseReference message_root = root.child(temp_key);
+
+
                 Map<String, Object> map2 = new HashMap<String, Object>();
                 map2.put("name", user_name);
                 map2.put("msg", message.getText().toString());
@@ -98,4 +102,5 @@ public class TchatRoomActivity extends AppCompatActivity {
             chat_conversation.append(chat_user_name + " : " + chat_msg + "\n");
         }
     }
+
 }
