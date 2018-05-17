@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class MatchActivity extends AppCompatActivity {
 
@@ -19,6 +20,14 @@ public class MatchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent goSelectPlanet = new Intent(MatchActivity.this, TchatActivity.class);
                 startActivity(goSelectPlanet);
+            }
+        });
+        ImageView imgAbandon = findViewById(R.id.iv_abandon2);
+        imgAbandon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent returnToSelectLovers = new Intent(MatchActivity.this, SeeLoversActivity.class);
+                startActivity(returnToSelectLovers);
             }
         });
 
