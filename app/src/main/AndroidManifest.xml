@@ -20,7 +20,13 @@
 
         <activity android:name=".ChooseSideActivity" />
 
-        <activity android:name=".MatchActivity" />
+        <activity android:name=".MatchActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".ChoosePlanetActivity"></activity>
 
@@ -35,11 +41,7 @@
         <activity android:name=".NewProfilActivity" />
 
         <activity android:name=".TchatActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name=".TchatRoomActivity"/>

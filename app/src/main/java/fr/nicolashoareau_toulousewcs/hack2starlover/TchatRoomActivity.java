@@ -42,6 +42,7 @@ public class TchatRoomActivity extends AppCompatActivity {
 
         user_name = getIntent().getExtras().get("user_name").toString();
         room_name = getIntent().getExtras().get("room_name").toString();
+
         setTitle("Room  - " + room_name);
 
         root = FirebaseDatabase.getInstance().getReference().child(room_name);

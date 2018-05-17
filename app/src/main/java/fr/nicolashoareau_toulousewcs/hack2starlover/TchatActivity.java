@@ -26,11 +26,9 @@ import java.util.Set;
 
 public class TchatActivity extends AppCompatActivity {
 
-    private ArrayAdapter<String> arrayAdapter;
-    private ArrayList<String> arrayList = new ArrayList();
     private String name;
 
-    private DatabaseReference root = FirebaseDatabase.getInstance().getReference();
+    private DatabaseReference root = FirebaseDatabase.getInstance().getReference().child("Planet");
 
 
     @Override
@@ -42,8 +40,22 @@ public class TchatActivity extends AppCompatActivity {
         final EditText etMessage = findViewById(R.id.et_message);
         Button btnSend = findViewById(R.id.btn_send);
 
-        arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, arrayList);
-        listMessage.setAdapter(arrayAdapter);
+        ArrayList<PlanetModel> planetModelArrayList = new ArrayList<>();
+        PlanetAdapter planetAdapter = new PlanetAdapter(this, planetModelArrayList);
+        final ListView listMonster = findViewById(R.id.list_message);
+        listMonster.setAdapter(planetAdapter);
+        try {
+            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "tatooine"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "naboo"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "alderaan"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "kashyyyk"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "kashyyyk"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "kashyyyk"));
+        } catch (Exception e) {
+        }
+
+        /*arrayAdapter = new ArrayAdapter<String>(this, R.layout.item_grid_planet, arrayList);
+        listMessage.setAdapter(arrayAdapter);*/
 
         request_user_name();
 
