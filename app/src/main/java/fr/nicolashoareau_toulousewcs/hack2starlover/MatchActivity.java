@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,6 +23,9 @@ public class MatchActivity extends AppCompatActivity {
     FirebaseDatabase mDatabase;
     DatabaseReference mRef;
     private String mUid;
+    private ImageView avatar1;
+    private ImageView avatar2;
+    private TextView username1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,43 @@ public class MatchActivity extends AppCompatActivity {
 
             }
         });
+
+        mDatabase = FirebaseDatabase.getInstance();
+        mUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        avatar1 = findViewById(R.id.iv_picture_person1);
+        avatar2 = findViewById(R.id.iv_picture_person2);
+        username1 = findViewById(R.id.tv_usenme_match_person1);
+
+        DatabaseReference pathID = mDatabase.getReference("User").child(mUid).child("Profil");
+        pathID.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //For avatar
+                if ((dataSnapshot.child("profilPic").getValue() != null)){
+                    String url = dataSnapshot.child("profilPic").getValue(String.class);
+                    Glide.with(getApplicationContext()).load(url).apply(RequestOptions.circleCropTransform()).into(avatar1);
+                }
+                //For username
+                //For Username
+                if ((dataSnapshot.child("pseudo").getValue() != null)){
+                    String username = dataSnapshot.child("pseudo").getValue(String.class);
+                    username1.setText(username);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
+
+
+
+
+
+
+
+
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
         ImageView imgDeco = findViewById(R.id.img_deco);
         imgDeco.setOnClickListener(new View.OnClickListener() {
