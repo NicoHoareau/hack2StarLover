@@ -5,7 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.GridView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -36,8 +39,26 @@ public class ChooseLoverActivity extends AppCompatActivity {
             }
         });
 
+        ImageButton buttonDeco = findViewById(R.id.iv_guide);
+        buttonDeco.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent log = new Intent(ChooseLoverActivity.this, LoginActivity.class);
+                startActivity(log);
+            }
+        });
 
+                //iv_guide
 
+        ImageButton imageView = findViewById(R.id.iv_backdialog_guide);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChooseLoverActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 

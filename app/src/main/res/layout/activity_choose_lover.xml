@@ -37,7 +37,7 @@
         app:layout_constraintStart_toEndOf="@+id/spin_gender"
         app:layout_constraintTop_toBottomOf="@+id/iv_profile" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/iv_guide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@mipmap/ic_launcher" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/iv_backdialog_guide"
         android:layout_width="276dp"
         android:layout_height="98dp"
