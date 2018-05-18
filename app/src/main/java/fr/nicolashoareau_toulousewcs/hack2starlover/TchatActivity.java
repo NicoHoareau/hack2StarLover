@@ -47,15 +47,17 @@ public class TchatActivity extends AppCompatActivity {
         listPlanet.setAdapter(planetAdapter);
         try {
             planetModelArrayList.add(new PlanetModel(R.drawable.tatooine_back, "Tatooine"));
-            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "Naboo"));
-            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "Alderaan"));
-            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "Kashyyyk"));
-            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "Kashyyyk"));
-            planetModelArrayList.add(new PlanetModel(R.drawable.ic_launcher_background, "Kashyyyk"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.naboo_back, "Naboo"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.alderaan_back, "Alderaan"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.kashyyyk_back, "Kashyyyk"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.coruscant_back, "Coruscant"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.kamino_back, "Kamino"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.jakku_back, "Jakku"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.dagobah_back, "Dagobah"));
         } catch (Exception e) {
         }
 
-        request_user_name();
+        //request_user_name();
 
 
         root.addValueEventListener(new ValueEventListener() {
@@ -94,8 +96,10 @@ public class TchatActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
-        });
-        */
+        });*/
+
+        final String username = getIntent().getExtras().get("username").toString();
+
 
         listMessage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -104,7 +108,7 @@ public class TchatActivity extends AppCompatActivity {
                 Intent intent = new Intent(TchatActivity.this, TchatRoomActivity.class);
                 String namePlanete = item.getNamePlanete();
                 intent.putExtra("room_name",namePlanete);
-                intent.putExtra("username",name);
+                intent.putExtra("username",username);
                 startActivity(intent);
             }
         });
