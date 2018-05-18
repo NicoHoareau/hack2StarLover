@@ -36,9 +36,9 @@
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="423dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="8dp">
+        android:layout_height="355dp"
+        app:layout_constraintTop_toBottomOf="@+id/iv_planet"
+        tools:layout_editor_absoluteX="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,4 +57,13 @@
                 tools:layout_editor_absoluteY="16dp" />
         </LinearLayout>
     </ScrollView>
+
+    <ImageView
+        android:id="@+id/iv_planet"
+        android:layout_width="match_parent"
+        android:layout_height="131dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_launcher" />
 </android.support.constraint.ConstraintLayout>

@@ -1,5 +1,6 @@
 package fr.nicolashoareau_toulousewcs.hack2starlover;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,7 +32,6 @@ public class TchatRoomActivity extends AppCompatActivity {
     private DatabaseReference root;
     private String temp_key;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +43,38 @@ public class TchatRoomActivity extends AppCompatActivity {
 
         user_name = getIntent().getExtras().get("username").toString();
         room_name = getIntent().getExtras().get("room_name").toString();
+        ImageView ivPlanet = findViewById(R.id.iv_planet);
+        if (room_name.equals("Tatooine") ){
+            Drawable drawable = getResources().getDrawable(R.drawable.tatooine_back);
+            ivPlanet.setImageDrawable(drawable);
+        }
+        if (room_name.equals("Naboo") ){
+            Drawable drawable = getResources().getDrawable(R.drawable.naboo_back);
+            ivPlanet.setImageDrawable(drawable);
+        }
+        if (room_name.equals("Alderaan") ){
+            Drawable drawable = getResources().getDrawable(R.drawable.alderaan_back);
+            ivPlanet.setImageDrawable(drawable);
+        }
+        if (room_name.equals("Kashyyyk") ){
+            Drawable drawable = getResources().getDrawable(R.drawable.kashyyyk_back);
+            ivPlanet.setImageDrawable(drawable);
+        }
+        if (room_name.equals("Coruscant") ){
+            Drawable drawable = getResources().getDrawable(R.drawable.coruscant_back);
+            ivPlanet.setImageDrawable(drawable);
+        }
+        if (room_name.equals("Kamino") ){
+            Drawable drawable = getResources().getDrawable(R.drawable.kamino_back);
+            ivPlanet.setImageDrawable(drawable);
+        }
+        if (room_name.equals("Jakku") ){
+            Drawable drawable = getResources().getDrawable(R.drawable.jakku_back);
+            ivPlanet.setImageDrawable(drawable);
+        }if (room_name.equals("Dagobah") ){
+            Drawable drawable = getResources().getDrawable(R.drawable.dagobah_back);
+            ivPlanet.setImageDrawable(drawable);
+        }
 
         root = FirebaseDatabase.getInstance().getReference("Match").child(room_name);
 

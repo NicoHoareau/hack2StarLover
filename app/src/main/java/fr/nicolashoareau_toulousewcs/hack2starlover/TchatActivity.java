@@ -53,7 +53,7 @@ public class TchatActivity extends AppCompatActivity {
             planetModelArrayList.add(new PlanetModel(R.drawable.coruscant_back, "Coruscant"));
             planetModelArrayList.add(new PlanetModel(R.drawable.kamino_back, "Kamino"));
             planetModelArrayList.add(new PlanetModel(R.drawable.jakku_back, "Jakku"));
-            planetModelArrayList.add(new PlanetModel(R.drawable.dagobah_back, "Dagoba"));
+            planetModelArrayList.add(new PlanetModel(R.drawable.dagobah_back, "Dagobah"));
         } catch (Exception e) {
         }
 
