@@ -91,33 +91,11 @@ public class MatchActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
-
-
-
-        final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        ImageView imgDeco = findViewById(R.id.img_deco);
-        imgDeco.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-                startActivity(new Intent(MatchActivity.this, LoginActivity.class));
-                finish();
-            }
-        });
-
-
-
         ImageView imgAbandon = findViewById(R.id.iv_abandon2);
         imgAbandon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent returnToSelectLovers = new Intent(MatchActivity.this, SeeLoversActivity.class);
+                Intent returnToSelectLovers = new Intent(MatchActivity.this, ChooseLoverActivity.class);
                 startActivity(returnToSelectLovers);
             }
         });

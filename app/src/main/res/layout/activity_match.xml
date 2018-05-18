@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/iv_back_match"
         android:layout_width="0dp"
-        android:layout_height="295dp"
+        android:layout_height="340dp"
         android:layout_marginTop="8dp"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -77,17 +77,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/laser_red" />
-
-    <ImageView
-        android:id="@+id/img_deco"
-        android:layout_width="51dp"
-        android:layout_height="35dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_avatar_profil" />
 
     <TextView
         android:id="@+id/tv_username_match_person1"
