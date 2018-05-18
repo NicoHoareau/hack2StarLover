@@ -29,7 +29,7 @@ public class ChooseLoverActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_lover);
 
-        GridView loverGrid = findViewById(R.id.grid_lovers);
+        final GridView loverGrid = findViewById(R.id.grid_lovers);
         final ArrayList<LoverModel> loverList = new ArrayList<>();
         final LoverGridAdapter adapter = new LoverGridAdapter(this,loverList);
 
@@ -57,7 +57,10 @@ public class ChooseLoverActivity extends AppCompatActivity {
         loverGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                LoverModel loverModel = (LoverModel)loverGrid.getItemAtPosition(position);
                 Intent intent = new Intent(ChooseLoverActivity.this, SeeLoversActivity.class);
+                intent.putExtra("urlAvatar", loverModel.getProfilPic().toString());
+                intent.putExtra("username2", loverModel.getPseudo().toString());
                 startActivity(intent);
             }
         });
