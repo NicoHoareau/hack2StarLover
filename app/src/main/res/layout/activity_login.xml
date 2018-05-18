@@ -8,14 +8,12 @@
 
 
     <EditText
-
         android:id="@+id/edit_email"
         android:layout_width="250dp"
         android:layout_height="45dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="Entrez votre mail"
         android:inputType="textEmailAddress"
@@ -31,7 +29,7 @@
         android:id="@+id/edit_password"
         android:layout_width="250dp"
         android:layout_height="45dp"
-
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="Entrez votre mot de passe"
         android:inputType="textPassword"
@@ -39,49 +37,20 @@
         android:textColor="#000000"
         android:textColorHint="@android:color/holo_orange_dark"
         android:visibility="visible"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_mail" />
 
     <ImageView
         android:id="@+id/image_logo_fond"
-        android:layout_width="372dp"
+        android:layout_width="match_parent"
         android:layout_height="273dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:visibility="visible"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/image_log"
-        android:layout_width="100dp"
-        android:layout_height="130dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="8dp"
-        android:text="Se connecter"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="@+id/edit_password"
-        app:layout_constraintHorizontal_bias="0.094"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_password" />
-
-    <Button
-        android:id="@+id/image_signup"
-        android:layout_width="100dp"
-        android:layout_height="129dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginStart="8dp"
-        android:text="nouveau compte"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.968"
-        app:layout_constraintStart_toStartOf="@+id/edit_password"
-        app:layout_constraintTop_toBottomOf="@+id/new_password" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back_starwars_love_match" />
 
     <EditText
         android:id="@+id/new_mail"
@@ -121,8 +90,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
 
-        android:text="Créer compte"
         android:ems="10"
+        android:text="Créer compte"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.121"
@@ -130,13 +99,13 @@
         app:layout_constraintTop_toBottomOf="@+id/new_password" />
 
     <ProgressBar
+        android:id="@+id/progressbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:id="@+id/progressbar"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -150,11 +119,71 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="84dp"
-        android:visibility="gone"
         android:text="Retour"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.883"
         app:layout_constraintStart_toStartOf="@+id/edit_password"
         app:layout_constraintTop_toBottomOf="@+id/new_password" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_password">
+
+        <Button
+            android:id="@+id/image_log"
+            android:layout_width="wrap_content"
+            android:layout_height="51dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="Se connecter"
+            android:textColor="@android:color/holo_green_dark"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/iv_logo_saber_green"
+            android:layout_width="50dp"
+            android:layout_height="51dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/laser_green" />
+
+        <Button
+            android:id="@+id/image_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="51dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="nouveau compte"
+            android:textColor="@android:color/holo_blue_dark"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/iv_logo_saber_blue"
+            android:layout_width="50dp"
+            android:layout_height="51dp"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/laser_blue" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:text="STAR  LOVE"
+        android:textColor="@android:color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
