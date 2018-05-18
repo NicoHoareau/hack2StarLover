@@ -2,9 +2,23 @@ package fr.nicolashoareau_toulousewcs.hack2starlover;
 
 public class UserModel {
     private String pseudo;
+
+    public UserModel(String pseudo, String profilPic, String genre) {
+        this.pseudo = pseudo;
+        this.profilPic = profilPic;
+        this.genre = genre;
+    }
+
     private String profilPic;
+    private String genre;
 
+    public String getGenre() {
+        return genre;
+    }
 
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
 
     public UserModel() {}
 
