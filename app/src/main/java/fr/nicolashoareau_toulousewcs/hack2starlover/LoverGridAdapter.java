@@ -9,6 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.ArrayList;
 
 public class LoverGridAdapter extends ArrayAdapter<LoverModel>{
@@ -26,9 +29,11 @@ public class LoverGridAdapter extends ArrayAdapter<LoverModel>{
             }
 
             TextView nameLover = (TextView) convertView.findViewById(R.id.tv_name_lover);
-            nameLover.setText(userGrid.getNameLover());
+            nameLover.setText(userGrid.getPseudo());
 
             final ImageView imgLover = (ImageView) convertView.findViewById(R.id.img_lover_grid);
+            Glide.with(getContext()).load(userGrid.getProfilPic()).apply(RequestOptions.circleCropTransform()).into(imgLover);
+
 
             return convertView;
 
