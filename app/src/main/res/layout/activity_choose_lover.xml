@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChooseLoverActivity">
+    tools:context=".ChooseLoverActivity"
+    android:background="@drawable/space_back">
 
     <ImageView
         android:id="@+id/iv_profile"
@@ -24,6 +25,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
+        android:background="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_profile" />
 
@@ -31,9 +33,13 @@
         android:id="@+id/spin_species"
         android:layout_width="150dp"
         android:layout_height="24dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginLeft="68dp"
+        android:layout_marginRight="32dp"
         android:layout_marginStart="68dp"
         android:layout_marginTop="24dp"
+        android:background="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/spin_gender"
         app:layout_constraintTop_toBottomOf="@+id/iv_profile" />
 
