@@ -26,7 +26,6 @@
         <activity android:name=".MatchActivity">
 
         </activity>
-        <activity android:name=".ChoosePlanetActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".SeeLoversActivity" />
         <activity android:name=".ChooseLoverActivity"></activity>
