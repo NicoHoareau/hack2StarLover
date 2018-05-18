@@ -7,6 +7,16 @@
     tools:context=".ChooseSideActivity">
 
     <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="383dp"
+        android:layout_height="224dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="fitEnd"
+        app:layout_constraintTop_toBottomOf="@+id/tv_choose_side"
+        app:srcCompat="@drawable/lovestarwars1"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <ImageView
         android:id="@+id/iv_lightside"
         android:layout_width="92dp"
         android:layout_height="108dp"
@@ -15,7 +25,19 @@
         android:layout_marginTop="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_choose_side"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:srcCompat="@drawable/logojedi" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="184dp"
+        android:layout_height="363dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="centerInside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:srcCompat="@drawable/darkvador" />
 
     <ImageView
         android:id="@+id/iv_darkside"
@@ -29,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_lightside_name"
         app:layout_constraintVertical_bias="0.55"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:srcCompat="@drawable/galactic_empire_emblem" />
 
     <TextView
         android:id="@+id/tv_choose_side"
