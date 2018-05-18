@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -78,6 +79,15 @@ public class ChooseLoverActivity extends AppCompatActivity {
             }
         });
 
+        ImageView imgProfile = findViewById(R.id.iv_profile);
+        imgProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToProfile = new Intent(ChooseLoverActivity.this, ProfileActivity.class);
+                startActivity(goToProfile);
+            }
+        });
+
 
 
         final Spinner spinnerGender = findViewById(R.id.spin_gender);
@@ -87,6 +97,93 @@ public class ChooseLoverActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Appliquer l'adapter au spinner
         spinnerGender.setAdapter(adapter2);
+
+        final Spinner spinnerSpecies = findViewById(R.id.spin_species);
+        //Utiliser un Adapter pour rentrer les données du spinner_array
+        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this,R.array.spinner_species, android.R.layout.simple_spinner_item);
+        //Spécifier le layout à utiliser pour afficher les données
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Appliquer l'adapter au spinner
+        spinnerSpecies.setAdapter(adapter3);
+
+
+        spinnerGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selection = spinnerGender.getItemAtPosition(position).toString();
+                if (selection.matches("Homme")) {
+                    database.getReference("User").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            loverList.clear();
+                            for (DataSnapshot userDataSnapshot : dataSnapshot.getChildren()) {
+                                if (userDataSnapshot.child("Profil").child("genre").getValue(String.class).equals("masculin")) {
+                                    LoverModel loverModel = userDataSnapshot.child("Profil").getValue(LoverModel.class);
+                                    loverList.add(new LoverModel(loverModel.getProfilPic(), loverModel.getPseudo()));
+                                }
+
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                    loverGrid.setAdapter(adapter);
+                }
+                if (selection.matches("Femme")) {
+                    database.getReference("User").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            loverList.clear();
+                            for (DataSnapshot userDataSnapshot : dataSnapshot.getChildren()) {
+                                if (userDataSnapshot.child("Profil").child("genre").getValue(String.class).equals("feminin")) {
+                                    LoverModel loverModel = userDataSnapshot.child("Profil").getValue(LoverModel.class);
+                                    loverList.add(new LoverModel(loverModel.getProfilPic(), loverModel.getPseudo()));
+                                }
+
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                    loverGrid.setAdapter(adapter);
+
+                }
+                if (selection.matches("Sélectionner un genre :")) {
+                    database.getReference("User").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            loverList.clear();
+                            for (DataSnapshot userDataSnapshot : dataSnapshot.getChildren()) {
+                                LoverModel loverModel = userDataSnapshot.child("Profil").getValue(LoverModel.class);
+                                loverList.add(new LoverModel(loverModel.getProfilPic(), loverModel.getPseudo()));
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                    loverGrid.setAdapter(adapter);
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
 
 
