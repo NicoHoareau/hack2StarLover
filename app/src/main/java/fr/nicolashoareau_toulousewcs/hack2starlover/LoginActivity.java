@@ -50,7 +50,6 @@ public class LoginActivity extends AppCompatActivity {
         Button imageLog = (Button) findViewById(R.id.image_log);
 
 
-
         mImageSignUp = findViewById(R.id.image_signup);
         mReturn = findViewById(R.id.iv_close_friend);
 
@@ -74,12 +73,9 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     });
                 }
-
             }
 
         });
-
-
 
 
         mImageSignUp.setOnClickListener(new View.OnClickListener() {
