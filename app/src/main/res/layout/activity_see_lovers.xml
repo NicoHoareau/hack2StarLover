@@ -36,12 +36,15 @@
         android:id="@+id/tv_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="64dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="144dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="36dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="132dp"
         android:gravity="center"
         android:text="TextView"
         android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_avatar2"
         app:layout_constraintTop_toTopOf="parent" />
 
