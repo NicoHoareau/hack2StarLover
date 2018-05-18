@@ -55,7 +55,7 @@ public class TchatActivity extends AppCompatActivity {
         } catch (Exception e) {
         }
 
-        request_user_name();
+        //request_user_name();
 
 
         root.addValueEventListener(new ValueEventListener() {
@@ -94,8 +94,10 @@ public class TchatActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
-        });
-        */
+        });*/
+
+        final String username = getIntent().getExtras().get("username").toString();
+
 
         listMessage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -104,7 +106,7 @@ public class TchatActivity extends AppCompatActivity {
                 Intent intent = new Intent(TchatActivity.this, TchatRoomActivity.class);
                 String namePlanete = item.getNamePlanete();
                 intent.putExtra("room_name",namePlanete);
-                intent.putExtra("username",name);
+                intent.putExtra("username",username);
                 startActivity(intent);
             }
         });

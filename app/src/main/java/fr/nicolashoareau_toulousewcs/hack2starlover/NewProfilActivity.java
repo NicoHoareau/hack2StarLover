@@ -105,7 +105,7 @@ public class NewProfilActivity extends AppCompatActivity {
                 else {
                     saveUserModel();
 
-                    Intent intent = new Intent(NewProfilActivity.this, MainActivity.class);
+                    Intent intent = new Intent(NewProfilActivity.this, ChooseLoverActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -181,13 +181,14 @@ public class NewProfilActivity extends AppCompatActivity {
                 UserModel userModel = new UserModel(pseudo, profilPic);
                 final FirebaseUser user = mAuth.getCurrentUser();
                 mDatabaseReference = mDatabase.getReference("User");
-                mDatabaseReference.child(mSide).child(user.getUid()).child("Profil").setValue(userModel);
+                mDatabaseReference.child(user.getUid()).child("Profil").setValue(userModel);
+                mDatabaseReference.child(user.getUid()).child("Profil").child("side").setValue(mSide);
 
 
                 checkBoxmasculin = findViewById(R.id.checkBox_m);
 
                 if (checkBoxmasculin.isChecked()){
-                    mDatabaseReference.child(mSide).child(user.getUid()).child("Profil").child("genre").
+                    mDatabaseReference.child(user.getUid()).child("Profil").child("genre").
                             setValue("masculin").addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -205,7 +206,7 @@ public class NewProfilActivity extends AppCompatActivity {
                 checkBoxfeminin = findViewById(R.id.checkBox_f);
                 if(checkBoxfeminin.isChecked()){
 
-                    mDatabaseReference.child(mSide).child(user.getUid()).child("Profil").child("genre").
+                    mDatabaseReference.child(user.getUid()).child("Profil").child("genre").
                             setValue("feminin").addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
