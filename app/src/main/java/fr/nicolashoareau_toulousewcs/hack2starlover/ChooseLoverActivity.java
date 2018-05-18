@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -28,6 +29,8 @@ public class ChooseLoverActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_lover);
+
+        final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
         final GridView loverGrid = findViewById(R.id.grid_lovers);
         final ArrayList<LoverModel> loverList = new ArrayList<>();
@@ -65,24 +68,13 @@ public class ChooseLoverActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton buttonDeco = findViewById(R.id.iv_guide);
+        ImageView buttonDeco = findViewById(R.id.iv_deco);
         buttonDeco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent log = new Intent(ChooseLoverActivity.this, LoginActivity.class);
-                startActivity(log);
-            }
-        });
-
-                //iv_guide
-
-        ImageButton imageView = findViewById(R.id.iv_backdialog_guide);
-
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ChooseLoverActivity.this, ProfileActivity.class);
-                startActivity(intent);
+                mAuth.signOut();
+                startActivity(new Intent(ChooseLoverActivity.this, LoginActivity.class));
+                finish();
             }
         });
 

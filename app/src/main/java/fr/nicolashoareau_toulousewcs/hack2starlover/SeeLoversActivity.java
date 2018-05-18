@@ -41,19 +41,19 @@ public class SeeLoversActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance();
         mRef = mDatabase.getReference("User").child("Profil");
-        mRef.orderByChild(username).addValueEventListener(new ValueEventListener() {
+        mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //For gender
-                if ((dataSnapshot.child("genre").getValue() != null)){
-                    String genre = dataSnapshot.child("genre").getValue(String.class);
-                    tvGender.setText(genre);
+                for (DataSnapshot charaDataSnapshot : dataSnapshot.getChildren()) {
+                    //For gender
+                        String genre = dataSnapshot.child("genre").getValue(String.class);
+                        tvGender.setText(genre);
+                    //For item1
+                        String url = dataSnapshot.child("charaChoose1").getValue(String.class);
+                        Glide.with(getApplicationContext()).load(url).apply(RequestOptions.circleCropTransform()).into(item1);
+
                 }
-                //For item1
-                if ((dataSnapshot.child("charaChoose1").getValue() != null)){
-                    String url = dataSnapshot.child("charaChoose1").getValue(String.class);
-                    Glide.with(getApplicationContext()).load(url).apply(RequestOptions.circleCropTransform()).into(item1);
-                }
+
             }
 
             @Override
