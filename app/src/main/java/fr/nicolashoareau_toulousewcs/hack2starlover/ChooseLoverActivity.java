@@ -10,6 +10,11 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,12 +29,26 @@ public class ChooseLoverActivity extends AppCompatActivity {
         GridView loverGrid = findViewById(R.id.grid_lovers);
         final ArrayList<LoverModel> loverList = new ArrayList<>();
         final LoverGridAdapter adapter = new LoverGridAdapter(this,loverList);
-        loverList.add(new LoverModel(R.drawable.ic_launcher_background, "perso1"));
-        loverList.add(new LoverModel(R.drawable.ic_launcher_background, "perso2"));
-        loverList.add(new LoverModel(R.drawable.ic_launcher_background, "perso3"));
-        loverList.add(new LoverModel(R.drawable.ic_launcher_background, "perso4"));
-        loverList.add(new LoverModel(R.drawable.ic_launcher_background, "perso5"));
-        loverList.add(new LoverModel(R.drawable.ic_launcher_background, "perso6"));
+
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        database.getReference("User").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                loverList.clear();
+                for (DataSnapshot userDataSnapshot : dataSnapshot.getChildren()) {
+                    LoverModel loverModel = userDataSnapshot.child("Profil").getValue(LoverModel.class);
+                    loverList.add(new LoverModel(loverModel.getProfilPic(), loverModel.getPseudo()));
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         loverGrid.setAdapter(adapter);
 
         loverGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
