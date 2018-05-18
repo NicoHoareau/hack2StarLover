@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +43,26 @@ public class ChooseLoverActivity extends AppCompatActivity {
             }
         });
 
+        ImageButton buttonDeco = findViewById(R.id.iv_guide);
+        buttonDeco.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent log = new Intent(ChooseLoverActivity.this, LoginActivity.class);
+                startActivity(log);
+            }
+        });
 
+                //iv_guide
 
+        ImageButton imageView = findViewById(R.id.iv_backdialog_guide);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChooseLoverActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 
@@ -53,13 +74,6 @@ public class ChooseLoverActivity extends AppCompatActivity {
         //Appliquer l'adapter au spinner
         spinnerGender.setAdapter(adapter2);
 
-        final Spinner spinnerSpecies = findViewById(R.id.spin_species);
-        //Utiliser un Adapter pour rentrer les données du spinner_array
-        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this,R.array.spinner_species, android.R.layout.simple_spinner_item);
-        //Spécifier le layout à utiliser pour afficher les données
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //Appliquer l'adapter au spinner
-        spinnerSpecies.setAdapter(adapter3);
 
 
 
