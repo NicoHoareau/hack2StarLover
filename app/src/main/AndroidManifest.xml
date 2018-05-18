@@ -19,9 +19,9 @@
             </intent-filter>
         </activity>
 
-
-        <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".MainActivity" />
+
         <activity android:name=".ChooseSideActivity" />
         <activity android:name=".MatchActivity">
 
@@ -29,6 +29,7 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".SeeLoversActivity" />
         <activity android:name=".ChooseLoverActivity"></activity>
+        <activity android:name=".ChoosePersoActivity"></activity>
         <activity android:name=".NewProfilActivity" />
         <activity android:name=".TchatActivity"></activity>
         <activity android:name=".TchatRoomActivity" />
