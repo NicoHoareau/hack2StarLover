@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ChoosePersoActivity">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toBottomOf="@+id/tv_sentence"
-        app:srcCompat="@mipmap/ic_launcher_round" />
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="400dp"
@@ -56,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <ImageView
-        android:id="@+id/iv_character"
+        android:id="@+id/iv_character_choose"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginEnd="8dp"
@@ -70,18 +59,7 @@
         app:srcCompat="@mipmap/ic_launcher_round" />
 
     <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/tv_sentence"
-        app:srcCompat="@mipmap/ic_launcher_round" />
-
-    <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/iv_choose1"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginLeft="80dp"
@@ -92,13 +70,35 @@
         app:srcCompat="@mipmap/ic_launcher_round" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/iv_choose2"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/iv_choose1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sentence"
+        app:srcCompat="@mipmap/ic_launcher_round" />
+
+    <ImageView
+        android:id="@+id/iv_choose3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/iv_choose2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sentence"
+        app:srcCompat="@mipmap/ic_launcher_round" />
+
+    <ImageView
+        android:id="@+id/iv_choose4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/iv_choose3"
         app:layout_constraintTop_toBottomOf="@+id/tv_sentence"
         app:srcCompat="@mipmap/ic_launcher_round" />
 
@@ -113,11 +113,11 @@
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_character"
+        app:layout_constraintTop_toBottomOf="@+id/iv_character_choose"
         tools:text="Phrase de description" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_valid_chara"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -128,6 +128,6 @@
         android:text="Ca me définit totalement !"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_choose3" />
 
 </android.support.constraint.ConstraintLayout>

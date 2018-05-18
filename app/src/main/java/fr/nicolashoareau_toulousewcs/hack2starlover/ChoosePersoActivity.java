@@ -4,21 +4,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class ChoosePersoActivity extends AppCompatActivity {
+
+    CharacterModel currentCharacter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,17 +56,78 @@ public class ChoosePersoActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                final CharacterModel currentCharacter = results.get(position);
-                ImageView imgCharacter = findViewById(R.id.iv_character);
-                Glide.with(ChoosePersoActivity.this).load(currentCharacter.getImage()).into(imgCharacter);
-                TextView sentence = findViewById(R.id.tv_sentence);
-                sentence.setText(currentCharacter.getDesc());
+                currentCharacter = results.get(position);
 
+                ImageView imgCharacter = findViewById(R.id.iv_character_choose);
+                Glide.with(ChoosePersoActivity.this).load(currentCharacter.getImage())
+                        .apply(RequestOptions.circleCropTransform()).into(imgCharacter);
 
+                database.getReference().orderByChild("image").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot charaDataSnapshot : dataSnapshot.getChildren()) {
+                            if (charaDataSnapshot.child("image").getValue() == currentCharacter.getImage()) {
+                                String sentence = charaDataSnapshot.child("desc").getValue(String.class);
+                                TextView seeSentence = findViewById(R.id.tv_sentence);
+                                seeSentence.setText(sentence);
+                            }
+                        }
+                    }
 
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+
+        final ImageView choose1 = findViewById(R.id.iv_choose1);
+        choose1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Glide.with(ChoosePersoActivity.this).load(currentCharacter.getImage())
+                        .apply(RequestOptions.circleCropTransform()).into(choose1);
+            }
+        });
+
+        final ImageView choose2 = findViewById(R.id.iv_choose2);
+        choose2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Glide.with(ChoosePersoActivity.this).load(currentCharacter.getImage())
+                        .apply(RequestOptions.circleCropTransform()).into(choose2);
+            }
+        });
+
+        final ImageView choose3 = findViewById(R.id.iv_choose3);
+        choose3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Glide.with(ChoosePersoActivity.this).load(currentCharacter.getImage())
+                        .apply(RequestOptions.circleCropTransform()).into(choose3);
+            }
+        });
+
+        final ImageView choose4 = findViewById(R.id.iv_choose4);
+        choose4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Glide.with(ChoosePersoActivity.this).load(currentCharacter.getImage())
+                        .apply(RequestOptions.circleCropTransform()).into(choose4);
+            }
+        });
+
+        Button validChara = findViewById(R.id.button_valid_chara);
+        validChara.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
             }
         });
+
+
+
 
     }
 }
