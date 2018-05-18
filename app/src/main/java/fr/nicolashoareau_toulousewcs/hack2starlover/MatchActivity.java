@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -26,11 +25,15 @@ public class MatchActivity extends AppCompatActivity {
     private ImageView avatar1;
     private ImageView avatar2;
     private TextView username1;
+    private TextView username2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match);
+
+        String pseudoLover = getIntent().getExtras().get("pseudo").toString();
+        String profilPicLover = getIntent().getExtras().get("profilPic").toString();
 
         mDatabase = FirebaseDatabase.getInstance();
         mUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -60,7 +63,12 @@ public class MatchActivity extends AppCompatActivity {
         mUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         avatar1 = findViewById(R.id.iv_picture_person1);
         avatar2 = findViewById(R.id.iv_picture_person2);
-        username1 = findViewById(R.id.tv_usenme_match_person1);
+        username1 = findViewById(R.id.tv_username_match_person1);
+        username2 = findViewById(R.id.tv_username_match_person2);
+
+        username2.setText(pseudoLover);
+        Glide.with(MatchActivity.this).load(profilPicLover).apply(RequestOptions.circleCropTransform()).into(avatar2);
+
 
         DatabaseReference pathID = mDatabase.getReference("User").child(mUid).child("Profil");
         pathID.addListenerForSingleValueEvent(new ValueEventListener() {

@@ -25,8 +25,8 @@ public class SeeLoversActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_see_lovers);
 
-        String urlAvatar = getIntent().getExtras().get("urlAvatar").toString();
-        String username = getIntent().getExtras().get("username2").toString();
+        final String urlAvatar = getIntent().getExtras().get("urlAvatar").toString();
+        final String username = getIntent().getExtras().get("username2").toString();
 
         ImageView imgAvatar = findViewById(R.id.iv_avatar2);
         Glide.with(getApplicationContext()).load(urlAvatar).apply(RequestOptions.centerCropTransform()).into(imgAvatar);
@@ -34,26 +34,32 @@ public class SeeLoversActivity extends AppCompatActivity {
         tvUsername.setText(username);
 
         final ImageView item1 = findViewById(R.id.iv_item1);
-        ImageView item2 = findViewById(R.id.iv_item2);
-        ImageView item3 = findViewById(R.id.iv_item3);
-        ImageView item4 = findViewById(R.id.iv_item4);
+        final ImageView item2 = findViewById(R.id.iv_item2);
+        final ImageView item3 = findViewById(R.id.iv_item3);
+        final ImageView item4 = findViewById(R.id.iv_item4);
         final TextView tvGender = findViewById(R.id.tv_gender);
 
         mDatabase = FirebaseDatabase.getInstance();
-        mRef = mDatabase.getReference("User").child("Profil");
-        mRef.orderByChild(username).addValueEventListener(new ValueEventListener() {
+        mRef = mDatabase.getReference("User");
+        mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //For gender
-                if ((dataSnapshot.child("genre").getValue() != null)){
-                    String genre = dataSnapshot.child("genre").getValue(String.class);
-                    tvGender.setText(genre);
+                for (DataSnapshot charaDataSnapshot : dataSnapshot.getChildren()) {
+                    if (charaDataSnapshot.child("Profil").child("pseudo").getValue(String.class).equals(username) ) {
+                        String uid = charaDataSnapshot.getKey().toString();
+                        String genre = charaDataSnapshot.child("Profil").child("genre").getValue(String.class);
+                        tvGender.setText(genre);
+                        String url1 = charaDataSnapshot.child("Profil").child("charaChoose1").getValue(String.class);
+                        Glide.with(getApplicationContext()).load(url1).apply(RequestOptions.circleCropTransform()).into(item1);
+                        String url2 = charaDataSnapshot.child("Profil").child("charaChoose2").getValue(String.class);
+                        Glide.with(getApplicationContext()).load(url2).apply(RequestOptions.circleCropTransform()).into(item2);
+                        String url3 = charaDataSnapshot.child("Profil").child("charaChoose3").getValue(String.class);
+                        Glide.with(getApplicationContext()).load(url3).apply(RequestOptions.circleCropTransform()).into(item3);
+                        String url4 = charaDataSnapshot.child("Profil").child("charaChoose4").getValue(String.class);
+                        Glide.with(getApplicationContext()).load(url4).apply(RequestOptions.circleCropTransform()).into(item4);
+                    }
                 }
-                //For item1
-                if ((dataSnapshot.child("charaChoose1").getValue() != null)){
-                    String url = dataSnapshot.child("charaChoose1").getValue(String.class);
-                    Glide.with(getApplicationContext()).load(url).apply(RequestOptions.circleCropTransform()).into(item1);
-                }
+
             }
 
             @Override
@@ -69,6 +75,8 @@ public class SeeLoversActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goToMatch = new Intent(SeeLoversActivity.this, MatchActivity.class);
+                goToMatch.putExtra("pseudo", username);
+                goToMatch.putExtra("profilPic", urlAvatar);
                 startActivity(goToMatch);
             }
         });

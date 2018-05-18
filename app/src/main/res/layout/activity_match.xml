@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_usenme_match_person1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_username_match_person1"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/back_starwars_love_match" />
 
@@ -90,7 +90,7 @@
         app:srcCompat="@drawable/logo_avatar_profil" />
 
     <TextView
-        android:id="@+id/tv_usenme_match_person1"
+        android:id="@+id/tv_username_match_person1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="18dp"
