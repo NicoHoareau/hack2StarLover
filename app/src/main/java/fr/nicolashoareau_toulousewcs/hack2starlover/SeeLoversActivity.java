@@ -33,12 +33,27 @@ public class SeeLoversActivity extends AppCompatActivity {
         TextView tvUsername = findViewById(R.id.tv_username);
         tvUsername.setText(username);
 
+        final ImageView item1 = findViewById(R.id.iv_item1);
+        ImageView item2 = findViewById(R.id.iv_item2);
+        ImageView item3 = findViewById(R.id.iv_item3);
+        ImageView item4 = findViewById(R.id.iv_item4);
+        final TextView tvGender = findViewById(R.id.tv_gender);
+
         mDatabase = FirebaseDatabase.getInstance();
-        mRef = mDatabase.getReference("User");
-        mRef.addValueEventListener(new ValueEventListener() {
+        mRef = mDatabase.getReference("User").child("Profil");
+        mRef.orderByChild(username).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                //For gender
+                if ((dataSnapshot.child("genre").getValue() != null)){
+                    String genre = dataSnapshot.child("genre").getValue(String.class);
+                    tvGender.setText(genre);
+                }
+                //For item1
+                if ((dataSnapshot.child("charaChoose1").getValue() != null)){
+                    String url = dataSnapshot.child("charaChoose1").getValue(String.class);
+                    Glide.with(getApplicationContext()).load(url).apply(RequestOptions.circleCropTransform()).into(item1);
+                }
             }
 
             @Override
