@@ -105,7 +105,7 @@ public class NewProfilActivity extends AppCompatActivity {
                 else {
                     saveUserModel();
 
-                    Intent intent = new Intent(NewProfilActivity.this, ChooseLoverActivity.class);
+                    Intent intent = new Intent(NewProfilActivity.this, ChoosePersoActivity.class);
                     startActivity(intent);
                     finish();
                 }

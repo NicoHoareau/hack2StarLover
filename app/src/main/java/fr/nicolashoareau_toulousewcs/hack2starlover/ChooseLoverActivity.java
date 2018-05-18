@@ -5,12 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ChooseLoverActivity extends AppCompatActivity {
 
@@ -59,6 +63,18 @@ public class ChooseLoverActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
+        final Spinner spinnerGender = findViewById(R.id.spin_gender);
+        //Utiliser un Adapter pour rentrer les données du spinner_array
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.spinner_gender, android.R.layout.simple_spinner_item);
+        //Spécifier le layout à utiliser pour afficher les données
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Appliquer l'adapter au spinner
+        spinnerGender.setAdapter(adapter2);
+
+
 
 
 

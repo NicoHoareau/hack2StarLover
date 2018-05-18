@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">hack2StarLover</string>
+    <string-array name="spinner_gender">
+        <item>Sélectionner un genre :</item>
+        <item>Homme</item>
+        <item>Femme</item>
+    </string-array>
+
+    <string-array name="spinner_species">
+        <item>Sélectionner une espèce :</item>
+        <item>Humain</item>
+        <item>Droid</item>
+        <item>Wookie</item>
+        <item>Yoda</item>
+        <item>Ewok</item>
+        <item>Gungan</item>
+        <item>Dug</item>
+        <item>Dathomirian Zabrak</item>
+        <item>Hutt</item>
+    </string-array>
+
+
+
+
+
+
+
 </resources>
